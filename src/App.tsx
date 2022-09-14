@@ -3,10 +3,10 @@ import "./App.css";
 import { Select } from "./Select";
 import { useCharacters } from "./useCharacters";
 
-const SIDES = Object.freeze({
-  DARK: "Dark",
-  LIGHT: "Light",
-});
+enum SIDES {
+  DARK = "Dark",
+  LIGHT = "Light",
+}
 
 const sidesList = Object.values(SIDES).map((side) => ({
   label: side,
@@ -14,7 +14,7 @@ const sidesList = Object.values(SIDES).map((side) => ({
 }));
 
 function App() {
-  const [characterId, setCharacterId] = useState();
+  const [characterId, setCharacterId] = useState<number>();
   const [side, setSide] = useState(SIDES.LIGHT);
 
   const [charactersList, status] = useCharacters();
@@ -41,6 +41,8 @@ function App() {
             . Not always accurate, but fascinating
           </p>
           <Select
+            id={"char"}
+            name={"char-select"}
             value={characterId}
             onChange={(value) => setCharacterId(value)}
             options={charactersList.map((char) => ({
@@ -49,6 +51,8 @@ function App() {
             }))}
           />
           <Select
+            id={"side"}
+            name={"side-select"}
             value={side}
             options={sidesList}
             onChange={(newSide) => setSide(newSide)}

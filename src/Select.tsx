@@ -1,14 +1,27 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 
-export const Select = ({
+type ChangeSelectEvent = ChangeEvent<HTMLSelectElement>;
+
+type Option<ValueType> = { value: ValueType; label: string };
+
+type SelectProps<ValueType> = {
+  id: string;
+  name: string;
+  disabled?: boolean;
+  value?: ValueType;
+  options: Option<ValueType>[];
+  onChange: (value: ValueType, event: ChangeSelectEvent) => void;
+};
+
+export const Select = <ValueType extends string | number>({
   id,
   name,
   disabled = false,
   value,
   options = [],
   onChange,
-}) => {
-  const handleChange = (event) => {
+}: SelectProps<ValueType>) => {
+  const handleChange = (event: ChangeSelectEvent) => {
     onChange(options[event.target.selectedIndex].value, event);
   };
 

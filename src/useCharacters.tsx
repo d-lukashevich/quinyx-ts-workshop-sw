@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
+import { Character } from "./types";
 
-export const useCharacters = () => {
-  const [charactersList, setCharactersList] = useState([]);
+export const useCharacters = (): [Character[], boolean] => {
+  const [charactersList, setCharactersList] = useState<Character[]>([]);
   const [status, setStatus] = useState(false);
   useEffect(() => {
     (async () => {
